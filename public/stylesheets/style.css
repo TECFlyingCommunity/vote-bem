@@ -24,7 +24,8 @@ main{
 
 form{ 
     margin-top: 50px;
-    width: 653px;      
+    width: 653px; 
+    border-style:solid;      
 }
 
 
