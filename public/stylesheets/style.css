@@ -1,8 +1,63 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+*{
+    margin:0; 
+    padding:0; 
+    box-sizing: border-box;
+}
+h1>span{ 
+    color:#ffb351;
 }
 
-a {
-  color: #00B7FF;
+main{ 
+    display:flex;  
+}
+
+.left{ 
+    margin-right: auto;
+}
+
+
+.right{ 
+    margin-left: auto;
+}
+
+
+form{ 
+    margin-top: 50px;
+    width: 653px;      
+}
+
+
+
+.head-form-format{ 
+    font-family: 'Roboto Condensed', sans-serif;
+    margin:auto;
+    width:640px;
+   
+    text-align: center;
+}
+
+form{
+ 
+  height: 500px;
+}
+.form-format{ 
+    width:640px;
+    margin-top:50px;
+    margin-left: 10px;
+
+   
+}
+
+
+.labels{
+    margin-top: 15px;
+}
+
+input[type=text]{
+    width:620px;
+    height: 45px;
+    border-radius:5px;
+    border-width: 1px;
+    border-style: solid;
 }
