@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
-const database = require('./../db');
+const database = require('../db');
  
-const UserModel = database.define('user', {
-    id: {
+const EleitorModel = database.define('eleitor', {
+    id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -14,7 +14,7 @@ const UserModel = database.define('user', {
     },
     email: {
         type: Sequelize.STRING,
-	allowNull:false
+	    allowNull:false
     },
     senha:{
 	type: Sequelize.STRING,
@@ -23,8 +23,12 @@ const UserModel = database.define('user', {
     cpf:{
 	type:Sequelize.STRING,
 	allowNull:false
+    },
+    titulo:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 })
 
-module.exports = UserModel;
+module.exports = EleitorModel;
 

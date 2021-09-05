@@ -4,7 +4,11 @@ var router = express.Router();
 
 (async () => {
   const database = require('./../db');
-  const Produto = require('./../model/user_model');
+  const Eleitor = require('./../model/eleitor_model');
+  const Candidato =  require('./../model/candidato_model');
+  const Partido = require('./../model/partido_model');
+  const Administrador = require('./../model/administrador_model');
+  const Voto = require('./../model/voto_model');
 
   try {
       const resultado = await database.sync();
@@ -13,6 +17,7 @@ var router = express.Router();
       console.log(error);
   }
 })();
+
 
 
 /* GET home page. */
