@@ -1,28 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Cadastro</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link
+      href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/stylesheets/estiloCadastro.css" />
   </head>
   <body>
-    
-    <form>
-      <div class='img-logo'></div>
-     
-      <label for='name'><h4>Nome</h4></label>
-      <input type ='text' id ='nome'></input>
-      
-      <label for='email'><h4>Email</h4></label>
-      <input type ='text' id ='email'></input>
-    
-      <label for='telefone'><h4>Telefone</h4></label>
-      <input type ='text' id ='telefone'></input>
-    
-      <label for='Mensagem'><h4>Mensagem</h4></label>
-      <input type ='text' id ="mensagem"></input>
-
-      <input type ="submit" value="Enviar" id="dados">
-  </form>
-
+    <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+      <div class="container">
+        <div class="card login-card">
+          <div class="row no-gutters">
+            <div class="col-md-5">
+              <img
+                src="img/1.png"
+                alt="login"
+                class="login-card-img"
+              />
+              <p
+                class="
+                  text-white
+                  font-weight-medium
+                  text-center
+                  flex-grow
+                  align-self-end
+                  footer-link
+                  text-small
+                "
+              >
+              
+              </p>
+            </div>
+            <div id="vtb" class="col-md-7">
+              <div class="card-body">
+                <div class="brand-wrapper">
+                  <img src="" alt="logo" class="logo" />
+                </div>
+                <p id="roboto" class="login-card-description">
+                  Faça seu Cadastro
+                </p>
+                <form action="#!">
+                  <div id="vvb" class="form-group">
+                    <label for="nome_completo" class="sr-only"></label>
+                    <input
+                      type="text"
+                      name="nome_completo"
+                      id="nome_completo"
+                      class="form-control"
+                      placeholder="Nome Completo"
+                    />
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="cpf" class="sr-only"></label>
+                    <input
+                      type="text"
+                      name="cpf"
+                      id="cpf"
+                      class="form-control"
+                      placeholder="CPF "
+                    />
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="telefone" class="sr-only"></label>
+                    <input
+                      type="text"
+                      name="telefone"
+                      id="telefone"
+                      class="form-control"
+                      placeholder="Telefone-(92) 9____ ____"
+                    />
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="email" class="sr-only"></label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      class="form-control"
+                      placeholder="email@email.com"
+                    />
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password" class="sr-only"></label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Senha"
+                    />
+                  </div>
+                  <div class="form-group mb-4">
+                    <label for="password2" class="sr-only"></label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Repita sua senha"
+                    />
+                  </div>
+                  <input
+                    name="login"
+                    id="login"
+                    class="btn btn-block login-btn mb-4"
+                    type="button"
+                    value="Login"
+                  />
+                </form>
+                <p class="login-card-footer-text">
+                  Ja possui uma conta ?
+                  <a href="#!" class="text-reset">Cadastrar</a>
+                </p>
+                <nav class="login-card-footer-nav">
+                  <a href="#!">Termos de uso.</a>
+                  <a href="#!">Politica de Privacidade</a>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   </body>
 </html>
