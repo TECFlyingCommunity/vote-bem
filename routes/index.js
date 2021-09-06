@@ -30,4 +30,10 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Login' });
 });
 
+/* GET Cadastro page. */ 
+router.get('/cadastro', function(req, res, next) {
+  res.render('cadastro', { title: 'cadastro' });
+});
+
+
 module.exports = router;
