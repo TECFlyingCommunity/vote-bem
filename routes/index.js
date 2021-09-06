@@ -35,5 +35,10 @@ router.get('/cadastro', function(req, res, next) {
   res.render('cadastro', { title: 'cadastro' });
 });
 
+/* GET Cadastro dashboard. */ 
+router.get('/dashboard',function(req, res, next) {
+  res.render('dashboard', { title: 'dashboard' });
+});
+
 
 module.exports = router;
