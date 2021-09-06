@@ -25,7 +25,7 @@ main{
 form{ 
     margin-top: 50px;
     width: 653px; 
-    border-style:solid;      
+         
 }
 
 
@@ -34,7 +34,6 @@ form{
     font-family: 'Roboto Condensed', sans-serif;
     margin:auto;
     width:640px;
-   
     text-align: center;
 }
 
