@@ -11,7 +11,8 @@ const PartidoModel = database.define('partido',{
 
     numPartido:{
         type:Sequelize.INTEGER,
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
     nomePartido:{
         type:Sequelize.STRING,

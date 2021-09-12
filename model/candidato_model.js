@@ -10,7 +10,8 @@ const CandidatoModel = database.define('candidato',{
     },
     numVoto:{
         type:Sequelize.INTEGER,
-        allowNull:false    
+        allowNull:false,
+        unique:true
     }
 
 

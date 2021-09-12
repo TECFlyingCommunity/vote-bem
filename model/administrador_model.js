@@ -10,8 +10,9 @@ const AdministradorModel = database.define('administrador',{
     },
     matricula:{
         type:Sequelize.STRING,
-        allowNull:false
+        allowNull:false,
+        unique:true
     }
-})
+});
 
 module.exports= AdministradorModel;
