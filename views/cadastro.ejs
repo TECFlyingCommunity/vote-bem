@@ -11,11 +11,11 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css"
+      href="/node/@mdi/font/css/materialdesignicons.min.css"
     />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      href="/node/bootstrap/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="/stylesheets/estiloCadastro.css" />
   </head>
@@ -52,12 +52,12 @@
                 <p id="roboto" class="login-card-description">
                   Faça seu Cadastro
                 </p>
-                <form action="#!">
+                <form action="/cadastro" method="POST">
                   <div id="vvb" class="form-group">
                     <label for="nome_completo" class="sr-only"></label>
                     <input
                       type="text"
-                      name="nome_completo"
+                      name="nome"
                       id="nome_completo"
                       class="form-control"
                       placeholder="Nome Completo"
@@ -74,13 +74,13 @@
                     />
                   </div>
                   <div class="form-group mb-4">
-                    <label for="telefone" class="sr-only"></label>
+                    <label for="titulo" class="sr-only"></label>
                     <input
                       type="text"
-                      name="telefone"
-                      id="telefone"
+                      name="titulo"
+                      id="titulo"
                       class="form-control"
-                      placeholder="Telefone-(92) 9____ ____"
+                      placeholder="234234234"
                     />
                   </div>
                   <div class="form-group mb-4">
@@ -97,7 +97,7 @@
                     <label for="password" class="sr-only"></label>
                     <input
                       type="password"
-                      name="password"
+                      name="senha"
                       id="password"
                       class="form-control"
                       placeholder="Senha"
@@ -117,7 +117,7 @@
                     name="login"
                     id="login"
                     class="btn btn-block login-btn mb-4"
-                    type="button"
+                    type="submit"
                     value="Cadastrar"
                   />
                 </form>
@@ -135,8 +135,7 @@
         </div>
       </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/node/jquery/dist/jquery.min.js"></script>
+    <script src="/node/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
