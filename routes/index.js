@@ -1,43 +1,143 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+
+const database = require("./../db");
+const EleitorModel = require("./../model/eleitor_model");
+const CandidatoModel = require("./../model/candidato_model");
+const PartidoModel = require("./../model/partido_model");
+const AdministradorModel = require("./../model/administrador_model");
+const VotoModel = require("./../model/voto_model");
+
+
+
+var eleitor = {
+  id:null,
+  nome:null,
+  email:null,
+  senha:null,
+  cpf:null,
+  titulo:null,
+};
 
 
 (async () => {
-  const database = require('./../db');
-  const Eleitor = require('./../model/eleitor_model');
-  const Candidato =  require('./../model/candidato_model');
-  const Partido = require('./../model/partido_model');
-  const Administrador = require('./../model/administrador_model');
-  const Voto = require('./../model/voto_model');
-
   try {
-      const resultado = await database.sync();
-      console.log(resultado);
+    const resultado = await database.sync();
+    console.log(resultado);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 })();
 
-
-
 /* GET home page. */
-router.get('/index', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/index", function (req, res, next) {
+  res.render("index", { title: "Express" });
 });
 
 /* GET login page. */
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Login' });
+router.get("/login", function (req, res, next) {
+  res.render("login", { title: "Login" });
 });
 
-/* GET Cadastro page. */ 
-router.get('/cadastro', function(req, res, next) {
-  res.render('cadastro', { title: 'cadastro' });
+router.post("/login", function (req, res, next) {
+  let email = req.body.email;
+  let senha = req.body.senha;
+
+  (async () => {
+    try {
+      const result = await EleitorModel.findAll({
+        where: {
+          email: email,
+          senha: senha,
+        },
+      });
+      
+      if(result.length === 0){
+        res.redirect("/login");
+        return ;
+      }
+    
+
+      eleitor.id=result[0].dataValues.id;
+      eleitor.nome=result[0].dataValues.nome;
+      eleitor.email=result[0].dataValues.email;
+      eleitor.senha=result[0].dataValues.senha;
+      eleitor.cpf=result[0].dataValues.cpf;
+      eleitor.titulo=result[0].dataValues.titulo;
+      
+      res.redirect("/votar");
+    } catch (error) {
+      console.log(error);
+      res.render("error", { message: "error" });
+    }
+  })();
+  
 });
 
-/* GET Cadastro dashboard. */ 
-router.get('/dashboard',function(req, res, next) {
-  res.render('dashboard', { title: 'dashboard' });
+/* GET Cadastro page. */
+router.get("/cadastro", function (req, res, next) {
+  res.render("cadastro", { title: "cadastro" });
+});
+
+router.post("/cadastro", function (req, res, next) {
+  let nome = req.body.nome;
+  let email = req.body.email;
+  let senha = req.body.senha;
+  let cpf = req.body.cpf;
+  let titulo = req.body.titulo;
+
+  if (senha == null || !senha) {
+    res.render("error", { message: "senha invalida" });
+    return;
+  }
+  if (email == null || !email) {
+    res.render("error", { message: "email invalida" });
+    return;
+  }
+  if (nome == null || !nome) {
+    res.render("error", { message: "nome invalida" });
+    return;
+  }
+  if (cpf == null || !cpf) {
+    res.render("error", { message: "cpf invalida" });
+    return;
+  }
+  if (titulo == null || !titulo) {
+    res.render("error", { message: "senha invalida" });
+    return;
+  }
+
+  console.log(nome, email, senha, cpf);
+
+  (async () => {
+    try {
+      const result = await EleitorModel.create({
+        nome: nome,
+        email: email,
+        senha: senha,
+        cpf: cpf,
+        titulo: titulo,
+      });
+      console.log(result);
+      res.redirect("/login");
+    } catch (error) {
+      console.log(error);
+      res.render("error", { message: "error" });
+    }
+  })();
+});
+
+/* GET Cadastro dashboard. */
+router.get("/dashboard", function (req, res, next) {
+  res.render("dashboard", { title: "dashboard" });
+});
+
+router.get("/votar", function (req, res, next) {
+  if(eleitor.id=null){
+    res.redirect("/login");
+    return;
+  }
+  res.render("votar", { title: "dashboard" });
 });
 
 
