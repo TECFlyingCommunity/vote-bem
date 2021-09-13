@@ -132,6 +132,16 @@ router.get("/dashboard", function (req, res, next) {
   res.render("dashboard", { title: "dashboard" });
 });
 
+/* GET Cadastro Votacao. */
+router.get("/consulta_candidato", function (req, res, next) {
+  res.render("consulta_candidato");
+});
+
+/* GET Cadastro Votar. */
+router.get("/votar_candidato", function (req, res, next) {
+  res.render("votar_candidato");
+});
+
 router.get("/votar", function (req, res, next) {
   if(eleitor.id=null){
     res.redirect("/login");
