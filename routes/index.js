@@ -9,7 +9,7 @@ const AdministradorModel = require("./../model/administrador_model");
 const VotoModel = require("./../model/voto_model");
 
 const TIPO_ADM = 2;
-const TIPO_CANTIDATO = 1;
+const TIPO_CANDIDATO = 1;
 const TIPO_ELEITOR = 0;
 
 var eleitor = {
@@ -41,7 +41,10 @@ router.get(["/index","/"], function (req, res, next) {
 
   if(eleitor.tipo == TIPO_ADM){
     res.redirect("/dashboard");
+    return ;
   }
+
+
   
   res.render("index", { title: "Express" });
 });
@@ -76,7 +79,14 @@ router.post("/login", function (req, res, next) {
       eleitor.senha=result[0].dataValues.senha;
       eleitor.cpf=result[0].dataValues.cpf;
       eleitor.titulo=result[0].dataValues.titulo;
+      eleitor.tipo=result[0].dataValues.tipo;
       
+
+      
+      if(eleitor.tipo == TIPO_ADM){
+        res.redirect("/dashboard");
+        return ;
+      }
       res.redirect("/index");
     } catch (error) {
       console.log(error);
