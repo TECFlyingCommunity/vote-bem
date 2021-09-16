@@ -8,7 +8,9 @@ const PartidoModel = require("./../model/partido_model");
 const AdministradorModel = require("./../model/administrador_model");
 const VotoModel = require("./../model/voto_model");
 
-
+const TIPO_ADM = 2;
+const TIPO_CANTIDATO = 1;
+const TIPO_ELEITOR = 0;
 
 var eleitor = {
   id:null,
@@ -17,6 +19,7 @@ var eleitor = {
   senha:null,
   cpf:null,
   titulo:null,
+  tipo:null,
 };
 
 
@@ -31,6 +34,15 @@ var eleitor = {
 
 /* GET home page. */
 router.get("/index", function (req, res, next) {
+  if(eleitor.id === null){
+    res.redirect("/login");
+    return;
+  }
+
+  if(eleitor.tipo == TIPO_ADM){
+    res.redirect("/dashboard");
+  }
+  
   res.render("index", { title: "Express" });
 });
 
@@ -65,7 +77,7 @@ router.post("/login", function (req, res, next) {
       eleitor.cpf=result[0].dataValues.cpf;
       eleitor.titulo=result[0].dataValues.titulo;
       
-      res.redirect("/votar");
+      res.redirect("/index");
     } catch (error) {
       console.log(error);
       res.render("error", { message: "error" });

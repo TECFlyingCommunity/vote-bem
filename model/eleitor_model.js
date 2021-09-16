@@ -31,6 +31,11 @@ const EleitorModel = database.define("eleitor", {
     allowNull: false,
     unique:true
   },
+  tipo: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  }
 });
 
 module.exports = EleitorModel;
