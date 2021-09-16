@@ -33,7 +33,7 @@ var eleitor = {
 })();
 
 /* GET home page. */
-router.get("/index", function (req, res, next) {
+router.get(["/index","/"], function (req, res, next) {
   if(eleitor.id === null){
     res.redirect("/login");
     return;
@@ -129,6 +129,7 @@ router.post("/cadastro", function (req, res, next) {
         senha: senha,
         cpf: cpf,
         titulo: titulo,
+        tipo:TIPO_ELEITOR,
       });
       console.log(result);
       res.redirect("/login");
