@@ -13,13 +13,13 @@ const TIPO_CANDIDATO = 1;
 const TIPO_ELEITOR = 0;
 
 var eleitor = {
-  id:null,
-  nome:null,
-  email:null,
-  senha:null,
-  cpf:null,
-  titulo:null,
-  tipo:null,
+  id: null,
+  nome: null,
+  email: null,
+  senha: null,
+  cpf: null,
+  titulo: null,
+  tipo: null,
 };
 
 
@@ -33,19 +33,19 @@ var eleitor = {
 })();
 
 /* GET home page. */
-router.get(["/index","/"], function (req, res, next) {
-  if(eleitor.id === null){
+router.get(["/index", "/"], function (req, res, next) {
+  if (eleitor.id === null) {
     res.redirect("/login");
     return;
   }
 
-  if(eleitor.tipo == TIPO_ADM){
+  if (eleitor.tipo == TIPO_ADM) {
     res.redirect("/dashboard");
-    return ;
+    return;
   }
 
 
-  
+
   res.render("index", { title: "Express" });
 });
 
@@ -66,26 +66,26 @@ router.post("/login", function (req, res, next) {
           senha: senha,
         },
       });
-      
-      if(result.length === 0){
+
+      if (result.length === 0) {
         res.redirect("/login");
-        return ;
+        return;
       }
-    
 
-      eleitor.id=result[0].dataValues.id;
-      eleitor.nome=result[0].dataValues.nome;
-      eleitor.email=result[0].dataValues.email;
-      eleitor.senha=result[0].dataValues.senha;
-      eleitor.cpf=result[0].dataValues.cpf;
-      eleitor.titulo=result[0].dataValues.titulo;
-      eleitor.tipo=result[0].dataValues.tipo;
-      
 
-      
-      if(eleitor.tipo == TIPO_ADM){
+      eleitor.id = result[0].dataValues.id;
+      eleitor.nome = result[0].dataValues.nome;
+      eleitor.email = result[0].dataValues.email;
+      eleitor.senha = result[0].dataValues.senha;
+      eleitor.cpf = result[0].dataValues.cpf;
+      eleitor.titulo = result[0].dataValues.titulo;
+      eleitor.tipo = result[0].dataValues.tipo;
+
+
+
+      if (eleitor.tipo == TIPO_ADM) {
         res.redirect("/dashboard");
-        return ;
+        return;
       }
       res.redirect("/index");
     } catch (error) {
@@ -93,7 +93,7 @@ router.post("/login", function (req, res, next) {
       res.render("error", { message: "error" });
     }
   })();
-  
+
 });
 
 /* GET Cadastro page. */
@@ -139,7 +139,7 @@ router.post("/cadastro", function (req, res, next) {
         senha: senha,
         cpf: cpf,
         titulo: titulo,
-        tipo:TIPO_ELEITOR,
+        tipo: TIPO_ELEITOR,
       });
       console.log(result);
       res.redirect("/login");
@@ -152,12 +152,86 @@ router.post("/cadastro", function (req, res, next) {
 
 /* GET Cadastro dashboard. */
 router.get("/dashboard", function (req, res, next) {
-  res.render("dashboard_home");
+  (async () => {
+    let liste = await CandidatoModel.findAll();
+
+    res.render("dashboard_home", { candidatos: liste });
+    return;
+  })();
+
 });
 
 router.get("/dashboard_eleitor", function (req, res, next) {
-  res.render("dashboard_eleitor");
+
+  (async () => {
+    let liste = await EleitorModel.findAll();
+
+    res.render("dashboard_eleitor", { eleitores: liste });
+
+    return;
+  })();
+
+
 });
+
+
+router.post("/cadastro_candidato", function (req, res, next) {
+
+  let cpf = req.body.cpf;
+  let numero = req.body.numero;
+  let partido = req.body.partido;
+  var idEleitor = 0;
+  console.log(cpf);
+  if (cpf == null || !cpf) {
+    res.render("error", { message: "cpf invalida" });
+    return;
+  }
+
+  if (numero == null || !numero) {
+    res.render("error", { message: "numero invalida" });
+    return;
+  }
+
+  if (partido == null || !partido) {
+    res.render("error", { message: "partido invalida" });
+    return;
+  }
+
+  (async () => {
+    let eleitorResult = await EleitorModel.findAll({
+      where: {
+        cpf: cpf,
+      }
+    });
+
+    console.log(eleitorResult.length != 0)
+    if (eleitorResult.length != 0) {
+      idEleitor = eleitorResult[0].dataValues.id;
+    }
+
+    if (idEleitor === 0) {
+      res.render("error", { message: "cpf do eleitor invalida" });
+      return;
+    }
+    console.log(idEleitor);
+    console.log(eleitorResult);
+
+    let result = await CandidatoModel.create({
+      id: idEleitor,
+      numVoto: numero,
+    });
+    console.log(result);
+
+
+  })();
+
+
+  (async () => {
+
+  })();
+  res.redirect("/dashboard")
+});
+
 
 /* GET Cadastro Votacao. */
 router.get("/consulta_candidato", function (req, res, next) {
@@ -170,7 +244,7 @@ router.get("/votar_candidato", function (req, res, next) {
 });
 
 router.get("/votar", function (req, res, next) {
-  if(eleitor.id=null){
+  if (eleitor.id = null) {
     res.redirect("/login");
     return;
   }
@@ -184,7 +258,7 @@ router.get("/resultados", function (req, res, next) {
 });
 
 router.get("/logout", function (req, res, next) {
-  eleitor.id=null;
+  eleitor.id = null;
   res.redirect("/login");
 
 });
