@@ -183,6 +183,12 @@ router.get("/resultados", function (req, res, next) {
   res.render("graphs");
 });
 
+router.get("/logout", function (req, res, next) {
+  eleitor.id=null;
+  res.redirect("/login");
+
+});
+
 
 
 module.exports = router;
