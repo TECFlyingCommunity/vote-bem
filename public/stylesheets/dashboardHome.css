@@ -1,4 +1,4 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 *{ 
     margin:0; 
     padding:0; 
@@ -43,7 +43,7 @@ header{
     position:absolute;
     height: 100%;
     box-shadow: 0px 10px 13px -7px #000000, 8px 6px 18px -2px rgba(0,0,0,0);
-
+    
      
 }
 .side-bar>a{
@@ -52,7 +52,7 @@ header{
     padding-left: 25px;
     text-decoration: none;
     color:#2f3030; 
-    text-transform: uppercase;
+    
     
 }
 .side-bar a:hover{
@@ -65,11 +65,7 @@ header{
 }
 
 .content{
-    margin-left:250px;
-    
-    
-    
-    
+    margin-left:250px; 
 }
 
 
@@ -80,7 +76,6 @@ header{
     background-color: white;
     border-color:#8a8a8a;
     border-radius: 5px;
-    
 
 }
 .content-header{   
@@ -93,12 +88,12 @@ header{
     
 }
 .content-header>span{
-    padding-left: 15px;
+    padding-left: 10px;
     text-transform: uppercase;
 }
 
 .content-btn{
-   margin-right: 40px;
+   margin-right: 20px;
    margin-left: auto;
 }
 .content-btn>button{
@@ -121,8 +116,15 @@ header{
 background-color: #003e6e;
 transition: 0.1s;
 }
-
-
-
+ 
+.table-header{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.table-headers{
+    
+    margin:10px;
+}
 
 

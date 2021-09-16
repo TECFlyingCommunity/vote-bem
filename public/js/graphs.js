@@ -5,14 +5,14 @@ constchart = new Chart(ctx, {
     type: 'doughnut',
  
     data: {
-        labels: ["manfrine", "rilmar", "aline", "bruno"],
+        labels: ["Label1", "label2", "label3", "label4"],
         datasets: [{
             label: "Candidatos",
             backgroundColor: [
                 'rgba(0, 255, 0, 1)',
-                'rgba(41, 128, 185,0.8)',
-                'rgba(52, 73, 94,0.8)',
-                'rgba(44, 62, 80,0.8)',
+                'rgba(255, 0, 0, 1)',
+                'rgba(255, 255, 0, 1)',
+                'rgba(255, 115, 0, 1)',
                 
             ],
             borderColor: [
@@ -21,7 +21,7 @@ constchart = new Chart(ctx, {
                 'rgba(0, 0, 0, 1)', 
                 'rgba(0, 0, 0, 1)', 
             ],
-            data: [40, 10, 10, 10],
+            data: [50, 30, 10, 10],
         }]
     },
     // Configuration options go here
