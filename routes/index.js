@@ -141,7 +141,7 @@ router.post("/cadastro", function (req, res, next) {
 
 /* GET Cadastro dashboard. */
 router.get("/dashboard", function (req, res, next) {
-  res.render("dashboard", { title: "dashboard" });
+  res.render("dashboard_home");
 });
 
 /* GET Cadastro Votacao. */
@@ -160,6 +160,12 @@ router.get("/votar", function (req, res, next) {
     return;
   }
   res.render("votar", { title: "dashboard" });
+});
+
+
+/* GET  GRAPHS  */
+router.get("/resultados", function (req, res, next) {
+  res.render("graphs");
 });
 
 
