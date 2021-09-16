@@ -144,6 +144,10 @@ router.get("/dashboard", function (req, res, next) {
   res.render("dashboard_home");
 });
 
+router.get("/dashboard_eleitor", function (req, res, next) {
+  res.render("dashboard_eleitor");
+});
+
 /* GET Cadastro Votacao. */
 router.get("/consulta_candidato", function (req, res, next) {
   res.render("consulta_candidato");
@@ -167,6 +171,7 @@ router.get("/votar", function (req, res, next) {
 router.get("/resultados", function (req, res, next) {
   res.render("graphs");
 });
+
 
 
 module.exports = router;
