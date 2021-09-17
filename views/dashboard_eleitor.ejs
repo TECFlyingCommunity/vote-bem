@@ -34,7 +34,7 @@
             <div class='content-card'>
                 
                 <div class='content-header'>
-                    <span><h4>Eleitores </h4></span>
+                    <span><h3>Eleitores </h3></span>
 
                     
                 </div>
@@ -52,13 +52,13 @@
 
                 <% eleitores.forEach(function(eleitor){ %>
 
-                    <div class='table-header'>
+                    <div class="data-row">
     
-                        <div class='table-headers'><%= eleitor.dataValues.id%></div>
-                        <div class='table-headers'><%= eleitor.dataValues.nome%></div>
-                        <div class='table-headers'><%= eleitor.dataValues.cpf%></div>
-                        <div class='table-headers'><%= eleitor.dataValues.email%></div>
-                        <div class='table-headers'><%= eleitor.dataValues.titulo%></div>
+                        <div class="data-row-2"> <%= eleitor.dataValues.id%> </div>
+                        <div class="data-row-2"> <%= eleitor.dataValues.nome%> </div>
+                        <div class="data-row-2"> <%= eleitor.dataValues.cpf%> </div>
+                        <div class="data-row-2"> <%= eleitor.dataValues.email%> </div>
+                        <div class="data-row-2"> <%= eleitor.dataValues.titulo%> </div>
                         
         
                     </div>
