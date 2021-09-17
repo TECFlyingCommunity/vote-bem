@@ -248,7 +248,34 @@ router.get("/votar", function (req, res, next) {
     res.redirect("/login");
     return;
   }
-  res.render("votar", { title: "dashboard" });
+  res.render("consultar_candidato");
+});
+
+router.post("/votar", function (req, res, next) {
+
+  let numero = req.body.candidato;
+
+
+  (async () => {
+
+  try {
+
+    let result = await CandidatoModel.findAll({
+  
+      where:{
+        numVoto: numero,
+      }
+    });
+
+    res.render("votar_candidato",{candidato: result[0].dataValues}); 
+  } catch (error) {
+    console.log(error);
+    res.render("error", { message: "numero invalida" });
+  }    
+
+  })();
+
+  
 });
 
 

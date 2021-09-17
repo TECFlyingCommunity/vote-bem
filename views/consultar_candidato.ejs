@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
-  <link rel="stylesheet" href="styleConsultar.css">
+  <link rel="stylesheet" href="/stylesheets/styleConsultar.css">
 </head>
 <body>
   <div class="profile-card">
@@ -15,10 +15,13 @@
       </div>
       <div class="nome">- - - -</div>
       <div class="cargo">- - - -</div>
-      <div>
-        <input class="candi"  type="text" placeholder="Numero do Candidato" >
-      </div>
-      <a href="#" class="contact-btn">Consultar</a>
+      <form action="/votar" method="POST">
+        <div>
+          <input class="candi" name="candidato"  type="text" placeholder="Numero do Candidato" >
+        </div>
+        <input type="submit" class="contact-btn" value="Consultar">
+      </form>
+      
     </div>
     <div class="card-footer">
       <div class="numbers">
