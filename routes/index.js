@@ -108,7 +108,7 @@ router.post("/cadastro", function (req, res, next) {
   let cpf = req.body.cpf;
   let titulo = req.body.titulo;
 
-  if (senha == null || !senha) {
+  if (senha === null || !senha) {
     res.render("error", { message: "senha invalida" });
     return;
   }
@@ -116,15 +116,15 @@ router.post("/cadastro", function (req, res, next) {
     res.render("error", { message: "email invalida" });
     return;
   }
-  if (nome == null || !nome) {
+  if (nome === null || !nome) {
     res.render("error", { message: "nome invalida" });
     return;
   }
-  if (cpf == null || !cpf) {
+  if (cpf === null || !cpf) {
     res.render("error", { message: "cpf invalida" });
     return;
   }
-  if (titulo == null || !titulo) {
+  if (titulo === null || !titulo) {
     res.render("error", { message: "senha invalida" });
     return;
   }
@@ -152,6 +152,10 @@ router.post("/cadastro", function (req, res, next) {
 
 /* GET Cadastro dashboard. */
 router.get("/dashboard", function (req, res, next) {
+  if (eleitor.id === null) {
+    res.redirect("/login");
+    return;
+  }
   (async () => {
     let liste = await CandidatoModel.findAll();
 
@@ -162,6 +166,10 @@ router.get("/dashboard", function (req, res, next) {
 });
 
 router.get("/dashboard_eleitor", function (req, res, next) {
+  if (eleitor.id === null) {
+    res.redirect("/login");
+    return;
+  }
 
   (async () => {
     let liste = await EleitorModel.findAll();
@@ -187,12 +195,12 @@ router.post("/cadastro_candidato", function (req, res, next) {
     return;
   }
 
-  if (numero == null || !numero) {
+  if (numero === null || !numero) {
     res.render("error", { message: "numero invalida" });
     return;
   }
 
-  if (partido == null || !partido) {
+  if (partido === null || !partido) {
     res.render("error", { message: "partido invalida" });
     return;
   }
@@ -233,18 +241,46 @@ router.post("/cadastro_candidato", function (req, res, next) {
 });
 
 
-/* GET Cadastro Votacao. */
-router.get("/consulta_candidato", function (req, res, next) {
-  res.render("consulta_candidato");
-});
 
-/* GET Cadastro Votar. */
-router.get("/votar_candidato", function (req, res, next) {
-  res.render("votar_candidato");
+router.get("/finalizar_voto/:idcandidato", function (req, res, next) {
+  const idCandidato = req.params.idcandidato;
+
+  console.log(idCandidato);
+
+  if (idCandidato === 0) {
+    res.render("error", { message: "Canditato invalido" });
+    return;
+  }
+  console.log(eleitor.id);
+  if (eleitor.id === null) {
+    res.render("error", { message: "nenhum usuario logado" });
+    return;
+  }
+
+
+
+  (async () => {
+    try {
+      await VotoModel.create({
+        idEleitor: eleitor.id,
+        idCandidato: idCandidato,
+      });
+
+      res.redirect("/index");
+    } catch (error) {
+      console.log(error);
+
+
+      res.render("error", { message: "Você não pode votar 2 vezes" });
+
+    }
+  })();
+
+
 });
 
 router.get("/votar", function (req, res, next) {
-  if (eleitor.id = null) {
+  if (eleitor.id === null) {
     res.redirect("/login");
     return;
   }
@@ -258,30 +294,73 @@ router.post("/votar", function (req, res, next) {
 
   (async () => {
 
-  try {
+    try {
 
-    let result = await CandidatoModel.findAll({
-  
-      where:{
-        numVoto: numero,
-      }
-    });
+      let resultCandidato = await CandidatoModel.findAll({
 
-    res.render("votar_candidato",{candidato: result[0].dataValues}); 
-  } catch (error) {
-    console.log(error);
-    res.render("error", { message: "numero invalida" });
-  }    
+        where: {
+          numVoto: numero,
+        }
+      });
+
+      let resultCandidatoInfo = await EleitorModel.findAll(
+        {
+          where: {
+            id: resultCandidato[0].dataValues.id,
+          }
+        }
+      );
+
+      res.render("votar_candidato", { candidato: resultCandidato[0].dataValues, info: resultCandidatoInfo[0].dataValues });
+    } catch (error) {
+      console.log(error);
+
+
+      res.render("error", { message: "numero invalida" });
+    }
 
   })();
 
-  
+
 });
 
 
 /* GET  GRAPHS  */
 router.get("/resultados", function (req, res, next) {
-  res.render("graphs");
+
+  (async () => {
+    let resultCandidatos = await CandidatoModel.findAll();
+
+    // console.log(resultCandidatos);
+    var listaNumero = [];
+    var listaVoto = [];
+
+    for(let index in resultCandidatos){
+      console.log(resultCandidatos[index]);
+
+
+      let count = await VotoModel.count({
+        where: {
+          idCandidato: resultCandidatos[index].dataValues.id,
+        }
+      });
+
+      console.log(count);
+      listaNumero.push(resultCandidatos[index].dataValues.numVoto);
+      listaVoto.push(count);
+
+
+      console.log(listaNumero);
+      console.log(listaVoto);
+     
+
+    }
+    res.render("graphs", { numeros: listaNumero, votos: listaVoto });
+
+
+
+  })();
+
 });
 
 
@@ -295,7 +374,6 @@ router.get("/logout", function (req, res, next) {
 /* GET INDEX */
 
 router.get("/index", function (req, res, next) {
-  eleitor.id = null;
   res.redirect("/index");
 
 });

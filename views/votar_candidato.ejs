@@ -13,7 +13,7 @@
       <div class="pic">
         <img src="/img/pic.png" alt="">
       </div>
-      <div class="nome">Bolso Naldo</div>
+      <div class="nome"><%=info.nome%></div>
       <div class="cargo">Presidente</div>
       <div class="bt">
         <a href="#" class="fab fa-twitter"></a>
@@ -21,12 +21,12 @@
         <a href="#" class="fab fa-twitter"></a>
         <a href="#" class="fab fa-twitter"></a>
       </div>
-      <a href="#" class="contact-btn">Votar</a>
+      <a href="/finalizar_voto/<%=candidato.id%> " class="contact-btn">Votar</a>
     </div>
     <div class="card-footer">
       <div class="numbers">
         <div class="item">
-          <span>17</span>
+          <span><%=candidato.numVoto%></span>
           Numero
         </div>
         <div class="border"></div>
