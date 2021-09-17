@@ -257,9 +257,19 @@ router.get("/resultados", function (req, res, next) {
   res.render("graphs");
 });
 
+
+/* GET LOGOUT */
 router.get("/logout", function (req, res, next) {
   eleitor.id = null;
   res.redirect("/login");
+
+});
+
+/* GET INDEX */
+
+router.get("/index", function (req, res, next) {
+  eleitor.id = null;
+  res.redirect("/index");
 
 });
 
